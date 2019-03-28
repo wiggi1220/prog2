@@ -36,7 +36,7 @@ class User extends React.Component {
           className={imageStyle}
           height="50px"
           width="50px"
-          src={defaultAvatar}
+          src={avatar || defaultAvatar}
           alt="avatar"
         />
 

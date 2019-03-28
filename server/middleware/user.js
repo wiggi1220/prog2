@@ -196,8 +196,10 @@ const saveProfilePic = async (request, h) => {
 
 const getFilePath = id => {
   // this is also possible with glob.sync and no callback at all
+  console.log("getFilePath", process.cwd());
+
   return new Promise(function(resolve, reject) {
-    glob(`**/${id}.*`, function(err, files) {
+    glob(`/${id}.*`, { cwd: UPLOAD_PATH }, function(err, files) {
       if (err) {
         reject(err);
       }
