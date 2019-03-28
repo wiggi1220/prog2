@@ -1,0 +1,44 @@
+input AuthentificationInput {
+  username: String
+  email: String
+  password: String!
+}
+
+type AvatarOutput {
+  file_adress: String
+}
+
+type DeleteOutput {
+  user_id: String
+}
+
+type Mutation {
+  registerUser(newUser: RegistrationInput): RegistrationOutput
+  deleteUser(userId: String!): DeleteOutput
+  updateUser(userId: String!, payload: RegistrationInput): DeleteOutput
+  authentificateUser(payload: AuthentificationInput): RegistrationOutput
+}
+
+type Query {
+  user(userId: String): User
+  userList: [User]
+  avatar(userId: String): AvatarOutput
+}
+
+input RegistrationInput {
+  username: String
+  email: String
+  password: String
+}
+
+type RegistrationOutput {
+  access_token: String
+}
+
+type User {
+  id: ID
+  username: String
+  email: String
+  password: String
+  avatar: String
+}
