@@ -22,6 +22,7 @@ class User {
     this.username = username;
     this.email = email;
     this.password = password;
+    this.hasAvatar = false;
   }
 }
 const UPLOAD_PATH = "public/profile_pictures";
@@ -71,7 +72,7 @@ const updateUser = async (id, payload) => {
     throw Boom.notFound("user not found!");
   }
 
-  const { username, email, password } = payload;
+  const { password } = payload;
   let hashedPassword;
 
   if (password) {
@@ -79,8 +80,7 @@ const updateUser = async (id, payload) => {
   }
 
   const updatedUser = {
-    username: username || user.username,
-    email: email || user.email,
+    ...payload,
     password: hashedPassword || user.password
   };
 
@@ -153,9 +153,9 @@ const verifyCredentials = async (request, h) => {
   }
 };
 
-const saveProfilePic = async (request, h) => {
+const saveProfilePic = async (user_id, payload) => {
   return new Promise((resolve, reject) => {
-    const uploadedFile = request.payload.file;
+    const uploadedFile = payload.file;
 
     if (!uploadedFile) {
       throw Boom.notFound("No file has been send");
@@ -189,23 +189,27 @@ const saveProfilePic = async (request, h) => {
         console.err("There was a problem writing the file on disk", err);
         reject(err);
       }
-      resolve();
+      resolve(user_id);
     });
   });
 };
 
 const getFilePath = id => {
   // this is also possible with glob.sync and no callback at all
-  console.log("getFilePath", process.cwd());
+  const dir = process.cwd();
 
   return new Promise(function(resolve, reject) {
-    glob(`/${id}.*`, { cwd: UPLOAD_PATH }, function(err, files) {
+    glob(`${dir}/${UPLOAD_PATH}/${id}.*`, function(err, files) {
       if (err) {
         reject(err);
       }
       resolve(files[0]);
     });
   });
+};
+
+const addAvatar = id => {
+  updateUser(id, { hasAvatar: true });
 };
 
 export {

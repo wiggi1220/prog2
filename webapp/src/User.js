@@ -1,6 +1,7 @@
 import React from "react";
 import { css } from "glamor";
 import { QueryRenderer } from "react-relay";
+import { pathOr } from "ramda";
 import graphql from "babel-plugin-relay/macro";
 import environment from "./environment";
 import defaultAvatar from "./assets/defaultAvatar.png";
@@ -12,7 +13,8 @@ const container = css({
   display: "flex",
   alignItems: "flex-start",
   overflow: "hidden",
-  backgroundColor: "white"
+  backgroundColor: "white",
+  justifyContent: "space-around"
 });
 
 const personalDataStyle = css({
@@ -20,22 +22,33 @@ const personalDataStyle = css({
   flexDirection: "column",
   alignItems: "flex-start",
   padding: 8,
-  marginLeft: 16
+  marginLeft: 16,
+  width: "40%"
+});
+
+const addAvatarStyle = css({
+  alignSelf: "flex-end",
+  height: 50,
+  width: "20%"
 });
 
 const imageStyle = css({
-  borderRadius: 100
+  borderRadius: 50,
+  height: 50,
+  width: 50
 });
 
 class User extends React.Component {
   render() {
-    const { email, username, avatar } = this.props.user;
+    const { email, username, avatar } = pathOr(
+      { username: "", email: "" },
+      ["user"],
+      this.props
+    );
     return (
       <div className={container}>
         <img
           className={imageStyle}
-          height="50px"
-          width="50px"
           src={avatar || defaultAvatar}
           alt="avatar"
         />
@@ -44,10 +57,24 @@ class User extends React.Component {
           <div>{username}</div>
           <div>{email}</div>
         </div>
+        {!avatar ? (
+          <div className={addAvatarStyle}>
+            <button className="button is-small button is-dark">
+              Upload Avatar
+            </button>
+          </div>
+        ) : (
+          <div className={addAvatarStyle}>
+            <button className="button is-small button is-dark">
+              Change Avatar
+            </button>
+          </div>
+        )}
       </div>
     );
   }
 }
+
 export default props => (
   <QueryRenderer
     environment={environment}

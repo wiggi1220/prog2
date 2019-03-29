@@ -1,4 +1,4 @@
-import { GraphQLString, GraphQLID } from "graphql";
+import { GraphQLString, GraphQLID, GraphQLBoolean } from "graphql";
 
 export const UserFields = {
   id: {
@@ -21,5 +21,9 @@ export const UserFields = {
   avatar: {
     type: GraphQLString,
     resolve: obj => obj.avatar
+  },
+  hasAvatar: {
+    type: GraphQLBoolean,
+    resolve: obj => obj.hasAvatar
   }
 };

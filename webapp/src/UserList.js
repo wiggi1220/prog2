@@ -43,7 +43,6 @@ export default class UserList extends React.Component {
               return <div>{error.message}</div>;
             } else if (props) {
               const data = pathOr([], ["userList"], props);
-              console.log("props", props);
               return data.map(({ id }, index) => (
                 <User userId={id} key={index} />
               ));

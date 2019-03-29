@@ -5,7 +5,7 @@ input AuthentificationInput {
 }
 
 type AvatarOutput {
-  file_adress: String
+  avatar: String
 }
 
 type DeleteOutput {
@@ -41,4 +41,5 @@ type User {
   email: String
   password: String
   avatar: String
+  hasAvatar: Boolean
 }

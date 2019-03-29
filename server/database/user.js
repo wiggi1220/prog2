@@ -41,12 +41,12 @@ const createUser = (db, newUser) => {
     .write();
 };
 
-const assignUser = (db, id, { username, email, password }) => {
+const assignUser = (db, id, updatedUser) => {
   // check what is returned
   return db
     .get("users")
     .find({ id })
-    .assign({ username, email, password })
+    .assign(updatedUser)
     .write();
 };
 

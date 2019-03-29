@@ -25,7 +25,7 @@ export default class Navigation extends React.Component {
     return (
       <nav className={topBar}>
         <div className={buttonStyle}>
-          <button className="button is-success" onClick={this.handleLogout}>
+          <button className="button is-danger" onClick={this.handleLogout}>
             <Link to="/">Logout</Link>
           </button>
         </div>

@@ -7,13 +7,16 @@ exports.plugin = {
     server.route({
       method: "GET",
       path: "/api/users/avatar/{id}",
+      config: {
+        auth: false
+      },
       handler: async (request, h) => {
         const filepath = await getFilePath(request.params.id);
 
         return (
           h
-            //   .file(filepath)
-            .response({ uri: filepath })
+            .file(filepath)
+            // .response({ uri: filepath })
 
             .code(200)
         );

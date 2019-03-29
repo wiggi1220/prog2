@@ -22,9 +22,9 @@ export const UserType = new GraphQLObjectType({
 export const AvatarOutputType = new GraphQLObjectType({
   name: "AvatarOutput",
   fields: {
-    file_adress: {
+    avatar: {
       type: GraphQLString,
-      resolve: obj => obj.uri
+      resolve: obj => obj.avatar
     }
   }
 });
