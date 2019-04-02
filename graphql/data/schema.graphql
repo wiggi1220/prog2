@@ -16,7 +16,7 @@ type Mutation {
   registerUser(newUser: RegistrationInput): RegistrationOutput
   deleteUser(userId: String!): DeleteOutput
   updateUser(userId: String!, payload: RegistrationInput): DeleteOutput
-  authentificateUser(payload: AuthentificationInput): RegistrationOutput
+  currUser(payload: AuthentificationInput): RegistrationOutput
 }
 
 type Query {
@@ -33,6 +33,12 @@ input RegistrationInput {
 
 type RegistrationOutput {
   access_token: String
+  id: ID
+  username: String
+  email: String
+  password: String
+  avatar: String
+  hasAvatar: Boolean
 }
 
 type User {

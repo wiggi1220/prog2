@@ -31,9 +31,15 @@ const query = graphql`
 
 export default class UserList extends React.Component {
   render() {
+    const { currUser } = this.props;
     return (
       <div className={container}>
+        <h2 className={title}>Logged in as:</h2>
+        <div>
+          <User userId={currUser.id} isLoggedIn />
+        </div>
         <h1 className={title}>Chats</h1>
+
         <QueryRenderer
           environment={environment}
           query={query}
@@ -42,10 +48,10 @@ export default class UserList extends React.Component {
               console.log("error", error);
               return <div>{error.message}</div>;
             } else if (props) {
-              const data = pathOr([], ["userList"], props);
-              return data.map(({ id }, index) => (
-                <User userId={id} key={index} />
-              ));
+              console.log(currUser, "currUser");
+              return props.userList.map(({ id }, index) =>
+                id !== currUser.id ? <User userId={id} key={index} /> : null
+              );
             }
             return <div>Loading</div>;
           }}

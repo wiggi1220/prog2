@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a72b4b268fbc6e8384146499cadeebfe
+ * @relayHash 013aad89c3d96022291a5e425eb87479
  */
 
 /* eslint-disable */
@@ -18,8 +18,13 @@ export type LoginMutationVariables = {|
   loginData?: ?AuthentificationInput
 |};
 export type LoginMutationResponse = {|
-  +authentificateUser: ?{|
-    +access_token: ?string
+  +currUser: ?{|
+    +access_token: ?string,
+    +id: ?string,
+    +username: ?string,
+    +avatar: ?string,
+    +hasAvatar: ?boolean,
+    +email: ?string,
   |}
 |};
 export type LoginMutation = {|
@@ -33,8 +38,13 @@ export type LoginMutation = {|
 mutation LoginMutation(
   $loginData: AuthentificationInput
 ) {
-  authentificateUser(payload: $loginData) {
+  currUser(payload: $loginData) {
     access_token
+    id
+    username
+    avatar
+    hasAvatar
+    email
   }
 }
 */
@@ -52,7 +62,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "authentificateUser",
+    "name": "currUser",
     "storageKey": null,
     "args": [
       {
@@ -69,6 +79,41 @@ v1 = [
         "kind": "ScalarField",
         "alias": null,
         "name": "access_token",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "id",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "username",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "avatar",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "hasAvatar",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "email",
         "args": null,
         "storageKey": null
       }
@@ -95,11 +140,11 @@ return {
     "operationKind": "mutation",
     "name": "LoginMutation",
     "id": null,
-    "text": "mutation LoginMutation(\n  $loginData: AuthentificationInput\n) {\n  authentificateUser(payload: $loginData) {\n    access_token\n  }\n}\n",
+    "text": "mutation LoginMutation(\n  $loginData: AuthentificationInput\n) {\n  currUser(payload: $loginData) {\n    access_token\n    id\n    username\n    avatar\n    hasAvatar\n    email\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '15bff2fe1b588cb64a914db583ac8779';
+(node/*: any*/).hash = '223b31b27e9f180293979130c0abf6d5';
 module.exports = node;

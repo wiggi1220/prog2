@@ -32,7 +32,7 @@ const Mutation = new GraphQLObjectType({
     registerUser: RegisterUserMutation,
     deleteUser: DeleteMessageMutation,
     updateUser: UpdateUserMutation,
-    authentificateUser: AuthentificateUserMutation
+    currUser: AuthentificateUserMutation
   }
 });
 

@@ -35,7 +35,8 @@ export const RegistrationOutputType = new GraphQLObjectType({
     access_token: {
       type: GraphQLString,
       resolve: obj => obj.access_token
-    }
+    },
+    ...UserFields
   }
 });
 

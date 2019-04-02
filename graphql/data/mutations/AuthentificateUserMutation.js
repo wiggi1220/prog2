@@ -12,7 +12,8 @@ export default {
   },
   resolve: async (obj, req) => {
     const url = `http://localhost:3000/api/users/login`;
-    const access_token = await connector("POST", url, null, req.payload);
-    return access_token;
+    const user = await connector("POST", url, null, req.payload);
+    console.log("user", user);
+    return user;
   }
 };

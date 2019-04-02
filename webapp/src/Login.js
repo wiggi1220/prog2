@@ -40,39 +40,37 @@ const buttonStyle = css({
 
 export default class Login extends React.Component {
   state = {
-    user: "",
+    username: "",
     password: ""
   };
   handleUserInput = event => {
-    this.setState({ user: event.target.value });
+    this.setState({ username: event.target.value });
   };
   handlePasswordInput = event => {
     this.setState({ password: event.target.value });
   };
   createVariables = () => {
-    const { user, password } = this.state;
-    if (user === "" || password === "") {
+    const { username, password } = this.state;
+    if (username === "" || password === "") {
       return;
     }
     const loginData = {};
-    if (user.match(/@/)) {
-      loginData.email = user;
+    if (username.match(/@/)) {
+      loginData.email = username;
     } else {
-      loginData.username = user;
+      loginData.username = username;
     }
     loginData.password = password;
     console.log(loginData);
     return { loginData };
   };
   onCompleted = data => {
-    if (!data.authentificateUser.access_token) {
+    if (!data.currUser.access_token) {
       console.warn("Invalid Password you little tart");
       return;
     }
-    sessionStorage.setItem(
-      "access_token",
-      data.authentificateUser.access_token
-    );
+    sessionStorage.setItem("access_token", data.currUser.access_token);
+    this.props.history.push("/home", { currUser: data.currUser });
     console.log("success", data);
   };
   onError = error => {
@@ -121,8 +119,13 @@ export default class Login extends React.Component {
 
 const mutation = graphql`
   mutation LoginMutation($loginData: AuthentificationInput) {
-    authentificateUser(payload: $loginData) {
+    currUser(payload: $loginData) {
       access_token
+      id
+      username
+      avatar
+      hasAvatar
+      email
     }
   }
 `;

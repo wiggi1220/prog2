@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 
 const topBar = css({
   backgroundColor: "#B0C4DE",
-  width: "100%",
-  height: "50px",
-  display: "absolute"
-});
-const buttonStyle = css({
   display: "flex",
   justifyContent: "flex-end",
+  width: "100%",
+  height: "50px",
   paddingRight: 16,
   paddingTop: 7
+});
+const buttonStyle = css({
+  color: "white"
 });
 
 export default class Navigation extends React.Component {
@@ -24,11 +24,11 @@ export default class Navigation extends React.Component {
   render() {
     return (
       <nav className={topBar}>
-        <div className={buttonStyle}>
-          <button className="button is-danger" onClick={this.handleLogout}>
-            <Link to="/">Logout</Link>
-          </button>
-        </div>
+        <button className="button is-danger" onClick={this.handleLogout}>
+          <Link className={buttonStyle} to="/">
+            Logout
+          </Link>
+        </button>
       </nav>
     );
   }

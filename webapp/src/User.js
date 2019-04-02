@@ -5,6 +5,7 @@ import { pathOr } from "ramda";
 import graphql from "babel-plugin-relay/macro";
 import environment from "./environment";
 import defaultAvatar from "./assets/defaultAvatar.png";
+import UploadAvatar from "./UploadAvatar";
 
 const container = css({
   margin: "0 32px",
@@ -45,6 +46,7 @@ class User extends React.Component {
       ["user"],
       this.props
     );
+    const { userId, isLoggedIn } = this.props;
     return (
       <div className={container}>
         <img
@@ -57,37 +59,31 @@ class User extends React.Component {
           <div>{username}</div>
           <div>{email}</div>
         </div>
-        {!avatar ? (
-          <div className={addAvatarStyle}>
-            <button className="button is-small button is-dark">
-              Upload Avatar
-            </button>
-          </div>
-        ) : (
-          <div className={addAvatarStyle}>
-            <button className="button is-small button is-dark">
-              Change Avatar
-            </button>
-          </div>
-        )}
+        {isLoggedIn && <UploadAvatar userId={this.props.userId} />}
       </div>
     );
   }
 }
 
-export default props => (
+export default variables => (
   <QueryRenderer
     environment={environment}
     query={query}
     variables={{
-      user_id: props.userId
+      user_id: variables.userId
     }}
     render={({ error, props }) => {
       if (error) {
         console.log("error", error);
         return <div>{error.message}</div>;
       } else if (props) {
-        return <User user={props.user} />;
+        return (
+          <User
+            user={props.user}
+            userId={variables.userId}
+            isLoggedIn={variables.isLoggedIn}
+          />
+        );
       }
       return <div>Loading</div>;
     }}

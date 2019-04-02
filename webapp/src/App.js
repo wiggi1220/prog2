@@ -1,24 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 
 import UserList from "./UserList";
 import Navigation from "./Navigation";
 import { css } from "glamor";
-import { Link } from "react-router-dom";
 
-const topBar = css({
-  backgroundColor: "red",
-  width: "100%",
-  height: "50px",
-  display: "absolute"
-});
-const buttonStyle = css({
-  width: "inherit",
-  display: "flex",
-  justifyContent: "flex-end",
-  paddingRight: 16,
-  marginTop: 16
+const bodyStyle = css({
+  paddingTop: 50
 });
 
-const App = () => [<Navigation />, <UserList />];
+class App extends React.Component {
+  render() {
+    console.log("currUser", this.props.location.state);
+    const { currUser } = this.props.location.state;
+
+    return [
+      <div key="header">
+        <Navigation />
+      </div>,
+      <div key="body" className={bodyStyle}>
+        <UserList currUser={currUser} />
+      </div>,
+      <div key="footer">footer</div>
+    ];
+  }
+}
 
 export default App;
