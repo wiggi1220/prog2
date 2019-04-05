@@ -11,7 +11,7 @@ export default {
   },
   resolve: async (obj, { userId }, context) => {
     const url = `http://localhost:3000/api/users/${userId}`;
-    const urlAvatar = `http://localhost:3000/api/users/avatar/${userId}`;
+    const urlAvatar = `http://localhost:3000/api/users/${userId}/avatar`;
     const user = await connector("GET", url, context.access_token);
 
     if (!user) {

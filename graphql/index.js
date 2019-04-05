@@ -10,6 +10,7 @@ import cors from "cors";
 // Launch GraphQL
 const graphql = express();
 graphql.use(cors());
+
 graphql.use(
   "/",
   graphQLHTTP(req => ({

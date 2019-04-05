@@ -2,7 +2,8 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInputObjectType,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLScalarType
 } from "graphql";
 import { UserFields } from "../fields";
 
