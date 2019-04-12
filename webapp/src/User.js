@@ -17,6 +17,10 @@ const container = css({
   backgroundColor: "white",
   justifyContent: "space-around"
 });
+const avatarContainerStyle = css({
+  width: "30%",
+  margin: "auto 0"
+});
 
 const personalDataStyle = css({
   display: "flex",
@@ -24,7 +28,7 @@ const personalDataStyle = css({
   alignItems: "flex-start",
   padding: 8,
   marginLeft: 16,
-  width: "40%"
+  width: "50%"
 });
 
 const addAvatarStyle = css({
@@ -49,12 +53,13 @@ class User extends React.Component {
     const { userId, isLoggedIn } = this.props;
     return (
       <div className={container}>
-        <img
-          className={imageStyle}
-          src={avatar || defaultAvatar}
-          alt="avatar"
-        />
-
+        <div className={avatarContainerStyle}>
+          <img
+            className={imageStyle}
+            src={avatar || defaultAvatar}
+            alt="avatar"
+          />
+        </div>
         <div className={personalDataStyle}>
           <div>{username}</div>
           <div>{email}</div>

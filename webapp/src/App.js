@@ -4,10 +4,6 @@ import UserList from "./UserList";
 import Navigation from "./Navigation";
 import { css } from "glamor";
 
-const bodyStyle = css({
-  paddingTop: 50
-});
-
 class App extends React.Component {
   render() {
     console.log("currUser", this.props.location.state);
@@ -17,7 +13,7 @@ class App extends React.Component {
       <div key="header">
         <Navigation />
       </div>,
-      <div key="body" className={bodyStyle}>
+      <div key="body">
         <UserList currUser={currUser} />
       </div>,
       <div key="footer">footer</div>

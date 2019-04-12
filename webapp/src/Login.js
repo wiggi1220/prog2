@@ -61,7 +61,6 @@ export default class Login extends React.Component {
       loginData.username = username;
     }
     loginData.password = password;
-    console.log(loginData);
     return { loginData };
   };
   onCompleted = data => {
@@ -71,6 +70,7 @@ export default class Login extends React.Component {
     }
     sessionStorage.setItem("access_token", data.currUser.access_token);
     this.props.history.push("/home", { currUser: data.currUser });
+
     console.log("success", data);
   };
   onError = error => {
@@ -109,7 +109,7 @@ export default class Login extends React.Component {
         </div>
         <div className={buttonStyle}>
           <button className="button is-success" onClick={this.handleLogin}>
-            <Link to="/home">Sign In</Link>
+            Sign In
           </button>
         </div>
       </div>
