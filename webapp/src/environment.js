@@ -3,7 +3,7 @@ import { Environment, Network, RecordSource, Store } from "relay-runtime";
 // Define a function that fetches the results of an operation (query/mutation/etc)
 // and returns its results as a Promise:
 function fetchQuery(operation, variables, cacheConfig, uploadables) {
-  console.log("variables", variables);
+  console.log("variables env", variables);
   return fetch("http://localhost:8000/", {
     method: "POST",
     headers: {
@@ -15,6 +15,7 @@ function fetchQuery(operation, variables, cacheConfig, uploadables) {
       variables
     })
   }).then(response => {
+    console.log("responsejson", response);
     return response.json();
   });
 }

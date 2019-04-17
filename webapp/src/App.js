@@ -4,17 +4,18 @@ import UserList from "./UserList";
 import Navigation from "./Navigation";
 import { css } from "glamor";
 
+const bodyStyle = css({
+  display: "grid",
+  gridTemplateColumns: "[ChatList] 33% [Chat] 66%"
+});
 class App extends React.Component {
   render() {
-    console.log("currUser", this.props.location.state);
-    const { currUser } = this.props.location.state;
-
     return [
       <div key="header">
         <Navigation />
       </div>,
       <div key="body">
-        <UserList currUser={currUser} />
+        <UserList />
       </div>,
       <div key="footer">footer</div>
     ];

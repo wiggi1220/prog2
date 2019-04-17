@@ -18,6 +18,7 @@ const buttonStyle = css({
 export default class Navigation extends React.Component {
   handleLogout = () => {
     sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("currUser");
   };
 
   render() {

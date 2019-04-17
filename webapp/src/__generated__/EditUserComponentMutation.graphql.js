@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9e0d3b66931b522b3dd24c2ce371e6f2
+ * @relayHash d9d86e61c8ad7dd46601d0712a33db0b
  */
 
 /* eslint-disable */
@@ -14,24 +14,24 @@ export type RegistrationInput = {|
   email?: ?string,
   password?: ?string,
 |};
-export type EditUserMutationVariables = {|
+export type EditUserComponentMutationVariables = {|
   userId: string,
   newerUser?: ?RegistrationInput,
 |};
-export type EditUserMutationResponse = {|
+export type EditUserComponentMutationResponse = {|
   +updateUser: ?{|
     +user_id: ?string
   |}
 |};
-export type EditUserMutation = {|
-  variables: EditUserMutationVariables,
-  response: EditUserMutationResponse,
+export type EditUserComponentMutation = {|
+  variables: EditUserComponentMutationVariables,
+  response: EditUserComponentMutationResponse,
 |};
 */
 
 
 /*
-mutation EditUserMutation(
+mutation EditUserComponentMutation(
   $userId: String!
   $newerUser: RegistrationInput
 ) {
@@ -93,7 +93,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "EditUserMutation",
+    "name": "EditUserComponentMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -101,19 +101,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "EditUserMutation",
+    "name": "EditUserComponentMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "EditUserMutation",
+    "name": "EditUserComponentMutation",
     "id": null,
-    "text": "mutation EditUserMutation(\n  $userId: String!\n  $newerUser: RegistrationInput\n) {\n  updateUser(userId: $userId, payload: $newerUser) {\n    user_id\n  }\n}\n",
+    "text": "mutation EditUserComponentMutation(\n  $userId: String!\n  $newerUser: RegistrationInput\n) {\n  updateUser(userId: $userId, payload: $newerUser) {\n    user_id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c278df62c368cb3c1c63fa5e5423f04c';
+(node/*: any*/).hash = 'b080d11b928d3556116ece03e14c5e45';
 module.exports = node;

@@ -5,6 +5,7 @@ import graphql from "babel-plugin-relay/macro";
 import { pathOr } from "ramda";
 import environment from "./environment";
 import User from "./User";
+import { getCurrentUser } from "./helper/user";
 
 const container = css({
   width: "33%",
@@ -31,7 +32,7 @@ const query = graphql`
 
 export default class UserList extends React.Component {
   render() {
-    const { currUser } = this.props;
+    const currUser = getCurrentUser();
     return (
       <div className={container}>
         <h2 className={title}>Logged in as:</h2>

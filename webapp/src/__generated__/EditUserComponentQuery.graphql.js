@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 64e85394abef95d44173c50a4db02a13
+ * @relayHash 23d93881104167023a1cc5c8a525f06b
  */
 
 /* eslint-disable */
@@ -9,31 +9,36 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type EditUserQueryVariables = {|
-  user_id?: ?string
+type EditUser_user$ref = any;
+export type EditUserComponentQueryVariables = {|
+  user_id: string
 |};
-export type EditUserQueryResponse = {|
+export type EditUserComponentQueryResponse = {|
   +user: ?{|
-    +username: ?string,
-    +email: ?string,
+    +$fragmentRefs: EditUser_user$ref
   |}
 |};
-export type EditUserQuery = {|
-  variables: EditUserQueryVariables,
-  response: EditUserQueryResponse,
+export type EditUserComponentQuery = {|
+  variables: EditUserComponentQueryVariables,
+  response: EditUserComponentQueryResponse,
 |};
 */
 
 
 /*
-query EditUserQuery(
-  $user_id: String
+query EditUserComponentQuery(
+  $user_id: String!
 ) {
   user(userId: $user_id) {
-    username
-    email
+    ...EditUser_user
     id
   }
+}
+
+fragment EditUser_user on User {
+  username
+  email
+  id
 }
 */
 
@@ -42,7 +47,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "user_id",
-    "type": "String",
+    "type": "String!",
     "defaultValue": null
   }
 ],
@@ -53,26 +58,12 @@ v1 = [
     "variableName": "user_id",
     "type": "String"
   }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "username",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "email",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "EditUserQuery",
+    "name": "EditUserComponentQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -86,15 +77,18 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/)
+          {
+            "kind": "FragmentSpread",
+            "name": "EditUser_user",
+            "args": null
+          }
         ]
       }
     ]
   },
   "operation": {
     "kind": "Operation",
-    "name": "EditUserQuery",
+    "name": "EditUserComponentQuery",
     "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
@@ -106,8 +100,20 @@ return {
         "concreteType": "User",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "username",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "email",
+            "args": null,
+            "storageKey": null
+          },
           {
             "kind": "ScalarField",
             "alias": null,
@@ -121,13 +127,13 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "EditUserQuery",
+    "name": "EditUserComponentQuery",
     "id": null,
-    "text": "query EditUserQuery(\n  $user_id: String\n) {\n  user(userId: $user_id) {\n    username\n    email\n    id\n  }\n}\n",
+    "text": "query EditUserComponentQuery(\n  $user_id: String!\n) {\n  user(userId: $user_id) {\n    ...EditUser_user\n    id\n  }\n}\n\nfragment EditUser_user on User {\n  username\n  email\n  id\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '4149538e008c09a9f0b71a3a33809df6';
+(node/*: any*/).hash = '1f4c83f4fb32d01433d396173864e745';
 module.exports = node;

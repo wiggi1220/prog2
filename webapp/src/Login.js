@@ -69,6 +69,8 @@ export default class Login extends React.Component {
       return;
     }
     sessionStorage.setItem("access_token", data.currUser.access_token);
+    sessionStorage.setItem("currUser", JSON.stringify(data.currUser));
+
     this.props.history.push("/home", { currUser: data.currUser });
 
     console.log("success", data);
@@ -85,6 +87,12 @@ export default class Login extends React.Component {
       onCompleted: this.onCompleted,
       onError: this.onError
     });
+  };
+  onKeyDown = e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      this.handleLogin();
+    }
   };
 
   render() {
@@ -105,6 +113,7 @@ export default class Login extends React.Component {
             type="password"
             placeholder="password"
             onChange={this.handlePasswordInput}
+            onKeyDown={this.onKeyDown}
           />
         </div>
         <div className={buttonStyle}>
