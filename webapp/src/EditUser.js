@@ -18,6 +18,7 @@ import { path } from "ramda";
 const container = css({
   width: "60%",
   margin: "0 auto",
+  marginTop: 50,
   height: 500,
   textAlign: "center",
   border: "2px solid black",
@@ -31,21 +32,12 @@ const titleStyle = css({
   fontSize: "2em",
   fontWeight: "bold"
 });
-const footerStyle = css({
-  position: "fixed",
-  bottom: 0,
-  width: "100%",
-  backgroundColor: "#B0C4DE"
-});
+
 const buttonStyle = css({
   color: "white"
 });
 
 class EditUser extends React.Component {
-  handleGoBack = () => {
-    this.props.history.goBack();
-  };
-
   render() {
     const user = getCurrentUser();
     return [
@@ -65,16 +57,16 @@ class EditUser extends React.Component {
               console.log("error", error);
               return null;
             } else if (props) {
-              return <EditUserRefetchContainer user={props.user} />;
+              return (
+                <EditUserRefetchContainer
+                  history={this.props.history}
+                  user={props.user}
+                />
+              );
             }
             return <div>Loading</div>;
           }}
         />
-      </div>,
-      <div key="footer" className={footerStyle}>
-        <button className="button is-link" onClick={this.handleGoBack}>
-          Go Back
-        </button>
       </div>
     ];
   }

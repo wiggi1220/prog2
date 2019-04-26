@@ -4,6 +4,8 @@ import { css } from "glamor";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import environment from "./environment";
+import deleteUserMutation from "./Mutations/DeleteUserMutation";
+
 import { commitMutation } from "react-relay";
 import { getCurrentUser } from "./helper/user";
 
@@ -27,6 +29,12 @@ const flexContainerStyle = css({
 const editInfoStyle = css({
   maxWidth: "110px",
   minWidth: "110px"
+});
+
+const buttonStyle = css({
+  marginTop: 20,
+  display: "flex",
+  justifyContent: "space-between"
 });
 
 export default class EditUserComponent extends React.Component {
@@ -83,6 +91,17 @@ export default class EditUserComponent extends React.Component {
     });
   };
 
+  handleDelete = id => () => {
+    deleteUserMutation(id, this.onError, this.onDeleteCompleted);
+  };
+
+  onDeleteCompleted = data => {
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("currUser");
+
+    console.log("User Successfully Deleted!", data.user_id);
+    this.props.history.push("/");
+  };
   onCompleted = data => {
     console.log("Success!", data.updateUser.user_id);
     // this.setState({ successfullyUpdated: true });
@@ -134,7 +153,13 @@ export default class EditUserComponent extends React.Component {
             />
           </div>
         </div>
-        <div>
+        <div className={buttonStyle}>
+          <button
+            className="button is-danger"
+            onClick={this.handleDelete(user.id)}
+          >
+            Delete User
+          </button>
           <button
             className="button is-success"
             onClick={this.handleEdit(user.id)}

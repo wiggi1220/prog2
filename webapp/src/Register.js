@@ -3,11 +3,10 @@ import { css } from "glamor";
 import { commitMutation } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import environment from "./environment";
-import { Link } from "react-router-dom";
 
 const container = css({
-  width: 300,
-  height: 270,
+  width: 400,
+  height: 370,
   borderRadius: 10,
   boxShadow: "1px 2px #B2B2B2",
   backgroundColor: "#D4EFFF",
@@ -34,55 +33,47 @@ const buttonStyle = css({
   width: "inherit",
   display: "flex",
   justifyContent: "flex-end",
-  paddingRight: 16,
-  marginTop: 16
+  paddingRight: 68,
+  marginTop: 40
 });
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    email: ""
   };
+
   handleUserInput = event => {
     this.setState({ username: event.target.value });
   };
+  handleEmailInput = event => {
+    this.setState({ email: event.target.value });
+  };
+
   handlePasswordInput = event => {
     this.setState({ password: event.target.value });
   };
 
   createVariables = () => {
-    const { username, password } = this.state;
-    if (username === "" || password === "") {
+    const { username, password, email } = this.state;
+    if (username === "" || password === "" || email === "") {
       return;
     }
-    const loginData = {};
-    if (username.match(/@/)) {
-      loginData.email = username;
-    } else {
-      loginData.username = username;
-    }
-    loginData.password = password;
-    return { loginData };
+    const newUser = {};
+
+    newUser.username = username;
+    newUser.email = email;
+    newUser.password = password;
+
+    return { newUser };
   };
 
-  onCompleted = data => {
-    if (!data.currUser.access_token) {
-      console.warn("Invalid Password you little tart");
-      return;
-    }
-    sessionStorage.setItem("access_token", data.currUser.access_token);
-    sessionStorage.setItem("currUser", JSON.stringify(data.currUser));
-
-    this.props.history.push("/home", { currUser: data.currUser });
-
-    console.log("success", data);
-  };
-  onError = error => {
-    console.warn(error);
-  };
-
-  handleLogin = () => {
+  handleRegister = () => {
     const variables = this.createVariables();
+    if (!variables) {
+      return;
+    }
     commitMutation(environment, {
       mutation,
       variables,
@@ -90,59 +81,68 @@ export default class Login extends React.Component {
       onError: this.onError
     });
   };
+
+  onCompleted = data => {
+    if (!data.registerUser.access_token) {
+      console.warn("something went wrong");
+      return;
+    }
+    this.props.history.push("/");
+  };
+
+  onError = error => {
+    console.warn(error);
+  };
+
   onKeyDown = e => {
     if (e.key === "Enter") {
       e.preventDefault();
-      this.handleLogin();
+      this.handleRegister();
     }
-  };
-  register = () => {
-    this.props.history.push("/register");
   };
 
   render() {
     return (
       <div className={container}>
-        <h1 className={pageTitle}>Login</h1>
+        <h1 className={pageTitle}>Register</h1>
         <div className={inputStyle}>
           <input
             className="input"
             type="text"
-            placeholder="username or email"
+            placeholder="enter username"
             onChange={this.handleUserInput}
           />
         </div>
         <div className={inputStyle}>
           <input
             className="input"
+            type="email"
+            placeholder="enter email"
+            onChange={this.handleEmailInput}
+          />
+        </div>
+        <div className={inputStyle}>
+          <input
+            className="input"
             type="password"
-            placeholder="password"
+            placeholder="enter password"
             onChange={this.handlePasswordInput}
             onKeyDown={this.onKeyDown}
           />
         </div>
         <div className={buttonStyle}>
-          <button className="button is-success" onClick={this.handleLogin}>
-            Sign In
-          </button>
-          <button className="button is-danger" onClick={this.register}>
+          <button className="button is-success" onClick={this.handleRegister}>
             Register
           </button>
-        </div>
+        </div>{" "}
       </div>
     );
   }
 }
-
 const mutation = graphql`
-  mutation LoginMutation($loginData: AuthentificationInput) {
-    currUser(payload: $loginData) {
+  mutation RegisterMutation($newUser: RegistrationInput) {
+    registerUser(newUser: $newUser) {
       access_token
-      id
-      username
-      avatar
-      hasAvatar
-      email
     }
   }
 `;

@@ -9,7 +9,11 @@ const topBar = css({
   width: "100%",
   height: "50px",
   paddingRight: 16,
-  paddingTop: 7
+  paddingTop: 7,
+  gridColumnStart: 1,
+  gridColumnEnd: 3,
+  gridRowStart: "nav-start",
+  gridRowEnd: "nav-end"
 });
 const buttonStyle = css({
   color: "white"

@@ -4,8 +4,8 @@ import { QueryRenderer } from "react-relay";
 import { pathOr } from "ramda";
 import graphql from "babel-plugin-relay/macro";
 import environment from "./environment";
-import defaultAvatar from "./assets/defaultAvatar.png";
 import UploadAvatar from "./UploadAvatar";
+import AvatarImage from "./Bricks/AvatarImage";
 
 const container = css({
   margin: "0 32px",
@@ -37,12 +37,6 @@ const addAvatarStyle = css({
   width: "20%"
 });
 
-const imageStyle = css({
-  borderRadius: 50,
-  height: 50,
-  width: 50
-});
-
 class User extends React.Component {
   render() {
     const { email, username, avatar } = pathOr(
@@ -50,15 +44,11 @@ class User extends React.Component {
       ["user"],
       this.props
     );
-    const { userId, isLoggedIn } = this.props;
+    const { userId, isLoggedIn, handleSelectedChat } = this.props;
     return (
-      <div className={container}>
+      <div onClick={handleSelectedChat} className={container}>
         <div className={avatarContainerStyle}>
-          <img
-            className={imageStyle}
-            src={avatar || defaultAvatar}
-            alt="avatar"
-          />
+          <AvatarImage avatar={avatar} />
         </div>
         <div className={personalDataStyle}>
           <div>{username}</div>
@@ -87,6 +77,7 @@ export default variables => (
             user={props.user}
             userId={variables.userId}
             isLoggedIn={variables.isLoggedIn}
+            handleSelectedChat={variables.handleSelectedChat}
           />
         );
       }

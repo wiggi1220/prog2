@@ -13,7 +13,6 @@ export default {
   resolve: async (obj, req) => {
     const url = `http://localhost:3000/api/users/login`;
     const user = await connector("POST", url, null, req.payload);
-    console.log("user", user);
     return user;
   }
 };

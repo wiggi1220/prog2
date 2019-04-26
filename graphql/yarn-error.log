@@ -2,7 +2,7 @@ Arguments:
   /home/ludwig/.nvm/versions/node/v10.11.0/bin/node /usr/share/yarn/bin/yarn.js update
 
 PATH: 
-  /home/ludwig/work/prog2/graphql/node_modules/.bin:/tmp/yarn--1554124796396-0.4418271584971398:/home/ludwig/work/prog2/graphql/node_modules/.bin:/home/ludwig/.config/yarn/link/node_modules/.bin:/home/ludwig/work/prog2/graphql/node_modules/.bin:/home/ludwig/.config/yarn/link/node_modules/.bin:/home/ludwig/.yarn/bin:/home/ludwig/.nvm/versions/node/v10.11.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/ludwig/.nvm/versions/node/v10.11.0/lib/node_modules/npm/bin/node-gyp-bin:/home/ludwig/.nvm/versions/node/v10.11.0/bin/node_modules/npm/bin/node-gyp-bin:/home/ludwig/.nvm/versions/node/v10.11.0/bin:/home/ludwig/bin:/home/ludwig/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  /home/ludwig/work/prog2/graphql/node_modules/.bin:/tmp/yarn--1555414005124-0.046572678549512414:/home/ludwig/work/prog2/graphql/node_modules/.bin:/home/ludwig/.config/yarn/link/node_modules/.bin:/home/ludwig/work/prog2/graphql/node_modules/.bin:/home/ludwig/.config/yarn/link/node_modules/.bin:/home/ludwig/.yarn/bin:/home/ludwig/.nvm/versions/node/v10.11.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/ludwig/.nvm/versions/node/v10.11.0/lib/node_modules/npm/bin/node-gyp-bin:/home/ludwig/.nvm/versions/node/v10.11.0/bin/node_modules/npm/bin/node-gyp-bin:/home/ludwig/.nvm/versions/node/v10.11.0/bin:/home/ludwig/bin:/home/ludwig/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 Yarn version: 
   1.12.3

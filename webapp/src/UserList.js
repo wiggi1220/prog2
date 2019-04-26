@@ -8,12 +8,20 @@ import User from "./User";
 import { getCurrentUser } from "./helper/user";
 
 const container = css({
-  width: "33%",
-  height: 1000,
+  height: "100%",
+  overflow: "hidden",
   textAlign: "center",
   border: "2px solid black",
   backgroundColor: "#5F9EA0",
-  padding: 5
+  padding: 5,
+  gridColumnStart: "1",
+  gridRowStart: "nav-end",
+  gridRowEnd: "ChatBody-end"
+});
+
+const scrollStyle = css({
+  height: 775,
+  overflow: "auto"
 });
 const title = css({
   color: "white",
@@ -40,23 +48,30 @@ export default class UserList extends React.Component {
           <User userId={currUser.id} isLoggedIn />
         </div>
         <h1 className={title}>Chats</h1>
-
-        <QueryRenderer
-          environment={environment}
-          query={query}
-          render={({ error, props }) => {
-            if (error) {
-              console.log("error", error);
-              return <div>{error.message}</div>;
-            } else if (props) {
-              console.log(currUser, "currUser");
-              return props.userList.map(({ id }, index) =>
-                id !== currUser.id ? <User userId={id} key={index} /> : null
-              );
-            }
-            return <div>Loading</div>;
-          }}
-        />
+        <div className={scrollStyle}>
+          <QueryRenderer
+            environment={environment}
+            query={query}
+            render={({ error, props }) => {
+              if (error) {
+                console.log("error", error);
+                return <div>{error.message}</div>;
+              } else if (props) {
+                console.log(currUser, "currUser");
+                return props.userList.map(({ id }, index) =>
+                  id !== currUser.id ? (
+                    <User
+                      userId={id}
+                      key={index}
+                      handleSelectedChat={this.props.handleSelectedChat(id)}
+                    />
+                  ) : null
+                );
+              }
+              return <div>Loading</div>;
+            }}
+          />
+        </div>
       </div>
     );
   }

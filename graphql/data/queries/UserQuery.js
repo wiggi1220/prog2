@@ -12,6 +12,7 @@ export default {
   resolve: async (obj, { userId }, context) => {
     const url = `http://localhost:3000/api/users/${userId}`;
     const urlAvatar = `http://localhost:3000/api/users/${userId}/avatar`;
+
     const user = await connector("GET", url, context.access_token);
 
     if (!user) {
@@ -24,6 +25,4 @@ export default {
     }
     return user;
   }
-  // const user = await connector("GET", url, context.access_token);
-  // return user;
 };
