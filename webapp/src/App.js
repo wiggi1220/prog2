@@ -11,7 +11,7 @@ const bodyStyle = css({
   display: "grid",
   gridTemplateColumns: "33% 67%",
   gridTemplateRows:
-    "[nav-start] 50px [nav-end] 225px [ChatHeader-end] 775px [ChatBody-end] auto [Footer-end]"
+    "[nav-start] 50px [nav-end] 225px [ChatHeader-end] 825px [ChatBody-end] auto [Footer-end]"
 });
 class App extends React.Component {
   state = {
@@ -34,7 +34,7 @@ class App extends React.Component {
           <ChatHeader id={this.state.selectedChatID} />
         ) : null}
         {this.state.isChatSelected ? <ChatWindow /> : null}
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

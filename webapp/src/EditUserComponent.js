@@ -42,7 +42,7 @@ export default class EditUserComponent extends React.Component {
     console.log("props", props);
     super(props);
     this.state = {
-      successfullyUpdated: false,
+      showNotification: false,
       username: "",
       email: "",
       password: ""
@@ -104,7 +104,7 @@ export default class EditUserComponent extends React.Component {
   };
   onCompleted = data => {
     console.log("Success!", data.updateUser.user_id);
-    // this.setState({ successfullyUpdated: true });
+    this.setState({ showNotification: true });
 
     this.props.relay.refetch(null, null, null, { force: true });
   };
@@ -112,14 +112,22 @@ export default class EditUserComponent extends React.Component {
     console.warn(error);
   };
 
+  renderNotification = name => {
+    console.log("rendered");
+    return (
+      <div className="notification is-success">
+        <button
+          className="delete"
+          onClick={() => this.setState({ showNotification: false })}
+        />
+        {`${name} wurde erfolgreich geupdatet!`}
+      </div>
+    );
+  };
   render() {
     const { user } = this.props;
     return (
       <div className={flexContainerStyle}>
-        {/* {this.state.successfullyUpdated && (
-          <Notification username={user.username} />
-        )} */}
-
         <div className={editFieldStyle}>
           <div className={editInfoStyle}>{user.username}</div>
           <div>
@@ -160,6 +168,9 @@ export default class EditUserComponent extends React.Component {
           >
             Delete User
           </button>
+          {this.state.showNotification &&
+            this.renderNotification(user.username)}
+
           <button
             className="button is-success"
             onClick={this.handleEdit(user.id)}
@@ -172,6 +183,7 @@ export default class EditUserComponent extends React.Component {
   }
 }
 
+//this could also go in mutations folder with own file, it stays here just to see both options
 const mutation = graphql`
   mutation EditUserComponentMutation(
     $userId: String!

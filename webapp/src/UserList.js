@@ -9,7 +9,7 @@ import { getCurrentUser } from "./helper/user";
 
 const container = css({
   height: "100%",
-  overflow: "hidden",
+  // overflow: "hidden",
   textAlign: "center",
   border: "2px solid black",
   backgroundColor: "#5F9EA0",

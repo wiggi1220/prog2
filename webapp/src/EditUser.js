@@ -2,7 +2,6 @@ import React from "react";
 
 import UserList from "./UserList";
 import Navigation from "./Navigation";
-import Notification from "./Notification";
 import EditUserComponent from "./EditUserComponent";
 
 import { getCurrentUser } from "./helper/user";
